@@ -1,7 +1,9 @@
 This program automatically solves a rumble or comparable board
 It reads a dictionary from a file given as the first argument and a board from the stdin
+
 Example usage:
-./rumble_solver /usr/share/dict/words
+
+$ ./rumble_solver /usr/share/dict/words
 4
 DFAX
 KLSU
@@ -23,4 +25,4 @@ eelas
 
 etc.....
 
-
+To compile just run make
