@@ -1,5 +1,5 @@
 #include "Trie.hpp"
-#include "tools.hpp"
+#include <ctype.h>
 
 Trie::Trie()
 {
@@ -29,7 +29,7 @@ void Trie::addWord(const std::string & word, int index)
     }
     else
     {
-        int i = cti(word[index]);
+        int i = tolower(word[index]) - 'a';
         if(i < 0 || i > 25)
         {
             return;
@@ -50,7 +50,7 @@ bool Trie::contains(const std::string & word, int index)
     }
     else
     {
-        int i = cti(word[index]);
+        int i = tolower(word[index]) - 'a';
         if(i < 0 || i > 25)
         {
             return false;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <ctype.h>
 #include <functional>
 #include <fstream>
 #include <string>
@@ -11,7 +12,7 @@
 using namespace std;
 
 char * * board;
-int board_width;
+unsigned int board_width;
 Trie * dict;
 
 deque<char> current_word;
@@ -73,6 +74,11 @@ int main(int argc, char * argv[])
         string line;
 
         fin.open(argv[1]);
+        if(!fin.is_open())
+        {
+            cout << "Could not open file " << argv[1] << endl;
+            return 1;
+        }
         while(true)
         {
             fin >> line;
@@ -85,6 +91,11 @@ int main(int argc, char * argv[])
         fin.close();
     }
     cin >> board_width;
+    if(board_width <= 0)
+    {
+        cout << "Invalid board width" << endl;
+        return 1;
+    }
     board = new char * [board_width];
     for(int y = 0; y < board_width; y++)
     {
@@ -95,6 +106,12 @@ int main(int argc, char * argv[])
         for(int x = 0; x < board_width; x++)
         {
             cin >> board[x][y];
+            board[x][y] = tolower(board[x][y]);
+            if(!(board[x][y] >= 'a' && board[x][y] <= 'z'))
+            {
+                cout << "Incorrect board format!" << endl;
+                return 0;
+            }
         }
     }
     for(int y = 0; y < board_width; y++)
@@ -115,7 +132,10 @@ int main(int argc, char * argv[])
     cout << "Found " << words.size() << " words" << endl;
     for(vector<string>::iterator iter = words.begin(); iter != words.end(); iter++)
     {
-        cout << (*iter) << endl;
+        if((*iter).size() != 1)
+        {
+            cout << (*iter) << endl;
+        }
     }
     delete dict;
     return 0;
