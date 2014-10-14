@@ -1,2 +1,2 @@
 all:
-	g++ -o rumble_solver rumble_solver.cpp Trie.cpp 
+	g++ -o boggle_solver boggle_solver.cpp Trie.cpp 
